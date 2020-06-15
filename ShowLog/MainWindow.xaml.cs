@@ -26,13 +26,30 @@ namespace ShowLog
         {
             InitializeComponent();
             DataContext = viewModel;
+
+            object obj = new object();
+            BindingOperations.EnableCollectionSynchronization(viewModel.LogMessages, obj);
+
+
+            object obj2 = new object();
+            BindingOperations.EnableCollectionSynchronization(StaticTarget.StaticLogMessages, obj2);
         }
 
-        private void AddLog_Click(object sender, RoutedEventArgs e)
+        private async void AddLog_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.LogMessages.Add(viewModel.LogMessage);
-            StaticTarget.StaticLogMessages.Add(viewModel.LogMessage);
-            viewModel.LogMessage = null;
+            await Task.Run(() =>
+            {
+                try
+                {
+                    viewModel.LogMessages.Add(viewModel.LogMessage);
+                    StaticTarget.StaticLogMessages.Add(viewModel.LogMessage);
+                    viewModel.LogMessage = null;
+                }
+                catch (Exception ex)
+                {
+
+                }
+            });
         }
     }
 }

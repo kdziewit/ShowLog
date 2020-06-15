@@ -9,17 +9,21 @@
     <Window.Resources>
         <local:StaticTarget x:Key="StaticTarget"/>
     </Window.Resources>
-    <Grid>
+    <TabControl>
+        <TabItem Header="Tab 1">
+            <Grid>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                        <TextBox Text="{Binding LogMessage}" Width="200"/>
+                        <Button x:Name="AddLog" Click="AddLog_Click">Dodaj</Button>
+                    </StackPanel>
+                    <ListBox ItemsSource="{Binding LogMessages}"/>
+                    <ListBox ItemsSource="{Binding Source={StaticResource StaticTarget}, Path=StaticLogMessages}"/>
+                </StackPanel>
 
-        <StackPanel>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                <TextBox Text="{Binding LogMessage}" Width="200"/>
-                <Button x:Name="AddLog" Click="AddLog_Click">Dodaj</Button>
-            </StackPanel>
-            <ListBox ItemsSource="{Binding LogMessages}"/>
-            <ListBox ItemsSource="{Binding Source={StaticResource StaticTarget}, Path=StaticLogMessages}"/>
-        </StackPanel>
 
-
-    </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Tab 2"></TabItem>
+    </TabControl>
 </Window>
